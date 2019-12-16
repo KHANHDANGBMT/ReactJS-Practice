@@ -9,8 +9,9 @@ class Human{
 
 class Person extends Human{
     constructor(){
-        super();
+        super(); //using to call Human constructor
         this.name = "Khanh";
+        this.gender = 'femal';
     }
     printMyName(){
         console.log(this.name);
