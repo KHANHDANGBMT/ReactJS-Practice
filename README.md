@@ -7,7 +7,9 @@
 ```
 ## Chapter3
 ```javascript
+-Understanding Component Basics
 -Create React app
 -Components
--Function
+-Creating a Functional Component
+-Working with Components & Re-Using Them Item
 ```
