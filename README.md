@@ -1,9 +1,13 @@
 # ReactJS-Practice
 ## Chapter2
--Function 
--Destructuring
--Reference
+```javascript
+Function 
+Destructuring
+Reference
+```
 ## Chapter3
+```javascript
 -Create React app
 -Components
 -Function
+```
