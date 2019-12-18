@@ -1,9 +1,9 @@
 # ReactJS-Practice
 ## Chapter2
 ```javascript
-Function 
-Destructuring
-Reference
+-Function 
+-Destructuring
+-Reference
 ```
 ## Chapter3
 ```javascript
