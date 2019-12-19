@@ -12,5 +12,7 @@
 -Components
 -Creating a Functional Component
 -Working with Components & Re-Using Them Item
--Props and Using State
+-Props and Create State
+-Handle event
+-Using
 ```
