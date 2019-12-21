@@ -14,5 +14,6 @@
 -Working with Components & Re-Using Them Item
 -Props and Create State
 -Handle event
--Using
+-Using the useState() Hook for State Manipulation
+-Stateless vs Statefull Components
 ```
