@@ -28,7 +28,6 @@
 ```
 ## Chapter5
 ```
--Adding and Using Radium, Using Radium Media Queries
--Enable and Using CSS Modules
--Adding Pseudo Selector
+-Adding and Using Radium
+-Using Radium Media Queries
 ```
