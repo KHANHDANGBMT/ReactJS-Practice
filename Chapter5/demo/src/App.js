@@ -3,6 +3,7 @@ import './App.css';
 // Radium
 // import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 class App extends Component {
   state = {
@@ -30,6 +31,7 @@ class App extends Component {
   }
   //update person onChange
   changedPersonName = (event, id) => {
+    console.log(event);
     const personIndex = this.state.persons.findIndex(element => {
       return element.id === id;
     });
@@ -64,14 +66,14 @@ class App extends Component {
         <div>
           {
             this.state.persons.map((element, index) => {
-              return (<Person
+              return ( <ErrorBoundary> <Person
                 name={element.name}
                 age={element.age}
                 click={() => this.deletePerson(index)}
                 changed={(event) => this.changedPersonName(event, element.id)}
                 key={element.id}
                 currentName = {element.name}
-              >Person tag</Person>);
+              >Person tag</Person></ErrorBoundary>);
             })
           }
         </div>
