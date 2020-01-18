@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit'
 import './App.css';
 
 class App extends Component {
@@ -13,7 +14,8 @@ class App extends Component {
         { id: '987', name: 'nhuy', age: 89 },
         { id: '652k', name: 'pluto', age: 92 }
       ],
-      showPersons: false
+      showPersons: false,
+      showCockpit: true
     }
   }
   // state = {
@@ -34,7 +36,10 @@ class App extends Component {
     console.log('[App.js] componentDidMount');
     console.log(this.state);
   }
-
+  shouldComponentUpdate(){
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
   toggleShowPersons = () => {
     const currentShowPersons = this.state.showPersons;
     this.setState({
@@ -74,7 +79,7 @@ class App extends Component {
       persons = (
         <div>
           {
-            <Persons
+          <Persons
               persons={this.state.persons}
               clicked={this.removePerson}
               changed={this.changedNamePerson}
@@ -84,8 +89,17 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Hello ReactJs</h1>
-        <button onClick={this.toggleShowPersons} >Toggle Person</button>
+        <button onClick={()=>{
+          this.setState({showCockpit: false});
+        }}>Remove Cockpit</button>
+        {this.state.showCockpit ? <Cockpit 
+          title={this.props.appTitle}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.toggleShowPersons}
+        ></Cockpit> : null}
+        
+        
         {persons}
       </div>
     );
