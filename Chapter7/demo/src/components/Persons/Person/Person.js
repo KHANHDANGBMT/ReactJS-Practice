@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import Aux from '../../../hoc/Aux'
+import Aux from '../../../hoc/Auxiliary'
 
 class person extends Component {
     render() {
