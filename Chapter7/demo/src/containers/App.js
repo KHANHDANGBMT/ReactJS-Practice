@@ -17,7 +17,9 @@ class App extends Component {
         { id: '652k', name: 'pluto', age: 92 }
       ],
       showPersons: false,
-      showCockpit: true
+      showCockpit: true,
+      changeCounter: 0,
+      testSetState: 0
     }
   }
   // state = {
@@ -60,10 +62,13 @@ class App extends Component {
       const persons = [...this.state.persons];
       persons[indexPerson] = person;
   
-      this.setState({
-        persons: persons
+      this.setState((prevState, props)=>{
+        return {
+          persons: persons,
+          changeCounter: prevState.changeCounter + 1
+        }
       })
-    
+      
   }
 
   removePerson = (index) => {
@@ -94,6 +99,14 @@ class App extends Component {
         <button onClick={()=>{
           this.setState({showCockpit: false});
         }}>Remove Cockpit</button>
+
+        <button onClick={()=>{
+          this.setState({ testSetState: this.state.testSetState + 1});
+          this.setState({ testSetState: this.state.testSetState + 1});
+          this.setState({ testSetState: this.state.testSetState + 1});
+          console.log(this.state.testSetState);
+        }}>Test state</button>
+          
         {this.state.showCockpit ? <Cockpit 
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
