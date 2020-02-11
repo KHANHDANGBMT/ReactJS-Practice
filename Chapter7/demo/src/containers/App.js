@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Persons from '../components/Persons/Persons'
-import Cockpit from '../components/Cockpit/Cockpit'
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 import './App.css';
-import withClass from '../hoc/WithClass'
-import Aux from '../hoc/Auxiliary'
+import withClass from '../hoc/WithClass';
+import Aux from '../hoc/Auxiliary';
 
 class App extends Component {
   constructor(props){
@@ -19,7 +19,8 @@ class App extends Component {
       showPersons: false,
       showCockpit: true,
       changeCounter: 0,
-      testSetState: 0
+      testSetState: 0,
+      authenticated: false
     }
   }
   // state = {
@@ -79,6 +80,10 @@ class App extends Component {
     })
   }
 
+  loginHandler =()=>{
+    this.setState({authenticated: true});
+  }
+
   render() {
     console.log('[App.js] render');
     let persons = null;
@@ -90,6 +95,7 @@ class App extends Component {
               persons={this.state.persons}
               clicked={this.removePerson}
               changed={this.changedNamePerson}
+              isAuthenticated={this.state.authenticated}
             ></Persons>
           }
         </div>);
@@ -112,6 +118,7 @@ class App extends Component {
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.toggleShowPersons}
+          login={this.loginHandler}
         ></Cockpit> : null}
         {persons}
       </Aux>
