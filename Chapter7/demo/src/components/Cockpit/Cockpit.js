@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
+import AuthContext from '../../context/auth-context'
 
 const Cockpit = (props) => {
     const toggleBtnRef = useRef(null);
     console.log('[Cockpit.js] rendering');
+    const authContext = useContext(AuthContext);
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
         // setTimeout(() => {
@@ -17,7 +19,7 @@ const Cockpit = (props) => {
         <div >
             <h1>{props.title}</h1>
             <button onClick={props.clicked} ref={toggleBtnRef}>Toggle Persons</button>
-            <button onClick={props.login}>Log in</button>
+            <button onClick={authContext.login}>Log in</button>
         </div>
     );
 };
