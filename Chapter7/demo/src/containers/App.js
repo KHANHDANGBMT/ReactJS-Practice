@@ -122,8 +122,9 @@ class App extends Component {
             clicked={this.toggleShowPersons}
             ></Cockpit> : null
           }
+          { persons }
         </AuthContext.Provider>
-        { persons }
+        
       </Aux >
     );
   }
