@@ -3,13 +3,17 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 import Logo from '../../Logo/Logo';
 import './SideDrawer.css';
 import Backdrop from '../../UI/Backdrop/backdrop';
-import Aux from '../../../hoc/Auxiliary';
+import Aux from '../../../hoc/Auxiliary/Auxiliary';
 
 const sideDrawer = (props) => {
+    let attachedClasses = ["SideDrawer", "Close"];
+    if(props.open){
+        attachedClasses=["SideDrawer", "Open"];
+    }
     return (
         <Aux>
-            <Backdrop show/>
-            <div className="SideDrawer">
+            <Backdrop show={props.open} clicked={props.closed}/>
+            <div className={attachedClasses.join(' ')}>
                 <Logo height="11%"></Logo>
                 <nav>
                     <NavigationItems></NavigationItems>
