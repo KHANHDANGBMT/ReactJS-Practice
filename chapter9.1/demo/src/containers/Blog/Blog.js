@@ -1,8 +1,9 @@
 import React, { Component } from 'react'; 
 import './Blog.css';
+import { Route } from 'react-router';
+import { Link } from 'react-router-dom';
 import Posts from './Posts/Posts';
-import { Route } from 'react-router-dom';
-
+import NewPost from './NewPost/NewPost';
 
 class Blog extends Component {
     render() {
@@ -11,12 +12,17 @@ class Blog extends Component {
                 <header className="Blog">
                     <nav>
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/">Post</a></li>
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to={{
+                                pathname: "/new-post",
+                                hash: '#submit',
+                                search: '?quick-submit=true'
+                            }}>Post</Link></li>
                         </ul>
                     </nav>
                 </header>
-                <Route path="/" render={()=><h1>Home</h1>}/>
+                <Route path="/" exact component={Posts}/>
+                <Route path="/new-post"  component={NewPost}/>
             </div>
         );
     }

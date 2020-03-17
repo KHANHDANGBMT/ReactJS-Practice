@@ -5,8 +5,7 @@ import './Posts.css';
 
 class Posts extends Component {
     state = {
-        posts: [],
-        error: false
+        posts: []
     }
 
     postSelectedHandler = (id) => {
@@ -36,7 +35,7 @@ class Posts extends Component {
             })
     }
 
-    render () {
+    render() {
         let posts = <p style={{ textAlign: "center", color: "red", fontWeight: "bold" }}>Something went wrong!!!</p>
         if (!this.state.error) {
             posts = this.state.posts.map(post => {
@@ -47,7 +46,6 @@ class Posts extends Component {
                     clicked={() => this.postSelectedHandler(post.id)}></Post>
             });
         }
-
         return (
             <section className="Posts">
                 {posts}
