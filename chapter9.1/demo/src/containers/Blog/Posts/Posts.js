@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from '../../../axios';
 import Post from '../../../components/Post/Post';
 import './Posts.css';
+import { Link } from 'react-router-dom';
 
 class Posts extends Component {
     state = {
@@ -9,9 +10,7 @@ class Posts extends Component {
     }
 
     postSelectedHandler = (id) => {
-        this.setState({
-            selectedPostId: id
-        })
+        
     }
 
     componentDidMount() {
@@ -27,11 +26,9 @@ class Posts extends Component {
                 this.setState({
                     posts: updatedPost
                 })
-                console.log(updatedPost);
             })
             .catch(er => {
                 console.log(er);
-                //this.setState({error: true});
             })
     }
 
@@ -39,11 +36,16 @@ class Posts extends Component {
         let posts = <p style={{ textAlign: "center", color: "red", fontWeight: "bold" }}>Something went wrong!!!</p>
         if (!this.state.error) {
             posts = this.state.posts.map(post => {
-                return <Post
-                    title={post.title}
-                    key={post.id}
-                    author={post.author}
-                    clicked={() => this.postSelectedHandler(post.id)}></Post>
+                return (
+                    <Link to={'/post/' + post.id} key={post.id}>
+                        <Post
+                            title={post.title}
+                            author={post.author}
+                            clicked={() => this.postSelectedHandler(post.id)}
+                            key={post.id}
+                        >
+                        </Post>
+                    </Link>);
             });
         }
         return (

@@ -1,9 +1,10 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import './Blog.css';
-import { Route } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { Link } from 'react-router-dom';
 import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost';
+import FullPost from '../Blog/FullPost/FullPost';
 
 class Blog extends Component {
     render() {
@@ -12,17 +13,26 @@ class Blog extends Component {
                 <header className="Blog">
                     <nav>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to={{
-                                pathname: "/new-post",
-                                hash: '#submit',
-                                search: '?quick-submit=true'
-                            }}>Post</Link></li>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to={{
+                                    pathname: "/new-post",
+                                    hash: '#submit',
+                                    search: '?quick-submit=true'
+                                    }}>New Post
+                                </Link>
+                            </li>
                         </ul>
                     </nav>
                 </header>
-                <Route path="/" exact component={Posts}/>
-                <Route path="/new-post"  component={NewPost}/>
+                <Switch>
+                    <Route path="/" exact component={Posts} />
+                    <Route path="/new-post" exact component={NewPost} />
+                    <Route path="/post/:id" exact component={FullPost} />
+                </Switch>
+
             </div>
         );
     }
