@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import './Blog.css';
-import { Route, Switch } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router';
+import {  NavLink } from 'react-router-dom';
 import Posts from './Posts/Posts';
+import asyncComponent from '../../hoc/asyncComponent';
 import NewPost from './NewPost/NewPost';
-import FullPost from '../Blog/FullPost/FullPost';
+const AsyncComponent = asyncComponent (()=>{
+    return import('./NewPost/NewPost');
+})
 
 class Blog extends Component {
+    state = {
+        authenticate: true
+    }
     render() {
         return (
             <div>
@@ -14,23 +20,33 @@ class Blog extends Component {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/">Home</Link>
+                                <NavLink to="/posts/"
+                                activeStyle={{
+                                    color: '#fa923f',
+                                    textDecoration: 'underline'
+                                }}
+                                activeClassName="my-active"
+                                >Post</NavLink>
                             </li>
                             <li>
-                                <Link to={{
+                                <NavLink to={{
                                     pathname: "/new-post",
                                     hash: '#submit',
                                     search: '?quick-submit=true'
-                                    }}>New Post
-                                </Link>
+                                    }}
+                                    >New Post
+                                </NavLink>
                             </li>
                         </ul>
                     </nav>
                 </header>
+                
                 <Switch>
-                    <Route path="/" exact component={Posts} />
-                    <Route path="/new-post" exact component={NewPost} />
-                    <Route path="/post/:id" exact component={FullPost} />
+                    {this.state.authenticate ? <Route path="/new-post" component={AsyncComponent} />  : null } 
+                    <Route path="/posts" component={Posts} />
+                    
+                    <Route render={()=><h1>Not Found</h1>}/>
+                    
                 </Switch>
 
             </div>
