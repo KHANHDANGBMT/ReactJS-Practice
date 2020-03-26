@@ -29,12 +29,14 @@ class BurgerBuilder extends Component {
     componentDidMount() {
         axios.get('https://react-my-burger-b3a67.firebaseio.com/ingredients.json')
             .then(response => {
-                this.setState({ ingredients: response.data })
+                this.setState({ ingredients: response.data });
+                
             })
             .catch(error => {
                 this.setState({error: error});
             });
     }
+
     updatePurchaseState(ingredients) {
         const sum = Object.keys(ingredients)
             .map((igKey) => {
@@ -86,37 +88,16 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        //alert("You continue");
-        this.setState({
-            loading: true
-        });
-        const orders = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
-            customer: {
-                name: 'max dang',
-                address: {
-                    street: 'test street 1',
-                    zipcode: '610200',
-                    country: 'vietnam'
-                },
-                email: 'khanhdangbmt@mm.com'
-            },
-            deliveryMethod: 'fastest'
+        let queryParams = [];
+        for(let value in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(value) + '=' + encodeURIComponent(this.state.ingredients[value]));
         }
-        axios.post('/oders.json', orders)
-            .then(response => {
-                console.log(response);
-                this.setState({
-                    loading: false, purchasing: false
-                });
-            })
-            .catch(error => {
-                console.log(error);
-                this.setState({
-                    loading: false, purchasing: false
-                });
-            });
+        queryParams.push('price='+this.state.totalPrice);
+        let queryComponent = queryParams.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryComponent
+        });
     }
 
     render() {
