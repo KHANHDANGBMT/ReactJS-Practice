@@ -8,7 +8,7 @@ import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
-
+import { checkValidity } from '../../../store/utility';
 
 class ContactData extends Component {
     state = {
@@ -103,10 +103,9 @@ class ContactData extends Component {
             ...updateOrderForm[inputIdentifier]
         };
         updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updateOrderForm[inputIdentifier] = updatedFormElement;
-        console.log(updatedFormElement);
         let formIsValid = true;
         for (let inputIdentifier in updateOrderForm) {
             formIsValid = updateOrderForm[inputIdentifier].valid && formIsValid;
@@ -115,27 +114,6 @@ class ContactData extends Component {
             orderForm: updateOrderForm,
             formIsValid: formIsValid
         })
-    }
-
-    checkValidity(value, rules) {
-        let isValid = true;
-        if(!rules){
-            return true;
-        }
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        return isValid;
     }
 
     orderHandler = (event) => {
@@ -151,7 +129,7 @@ class ContactData extends Component {
             userId: this.props.userId
         }
         this.props.onOrderBurger(orders, this.props.token);
-        
+
     }
 
 

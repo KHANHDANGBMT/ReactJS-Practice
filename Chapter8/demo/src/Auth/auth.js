@@ -4,9 +4,10 @@ import { Redirect } from 'react-router-dom';
 
 import Input from '../components/UI/Input/Input';
 import Button from '../components/UI/Button/Button';
-import './auth.css'; 
+import './auth.css';
 import Spinner from '../components/UI/Spinner/Spinner';
 import * as actions from '../store/actions/index';
+import { checkValidity } from '../store/utility'
 
 
 class Auth extends Component {
@@ -43,26 +44,6 @@ class Auth extends Component {
         },
         isSignup: true
     }
-    checkValidity(value, rules) {
-        let isValid = true;
-        if (!rules) {
-            return true;
-        }
-
-        if (rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        return isValid;
-    }
 
     inputChangedHandler = (event, controlName) => {
         const updatedControls = {
@@ -70,7 +51,7 @@ class Auth extends Component {
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
-                valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
+                valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
             }
         };
@@ -91,6 +72,7 @@ class Auth extends Component {
     }
 
     componentDidMount() {
+
         if(!this.props.buildingBurger && this.props.authRedirectPath!=='/'){
             this.props.onSetAuthRedirectPath('/');
         }
@@ -161,7 +143,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     };
 };
 

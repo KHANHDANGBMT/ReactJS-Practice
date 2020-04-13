@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import { Route, Redirect } from 'react-router-dom';
 import ContactData from '../Checkout/ContactData/ContactData';
-import { purchaseBurgerStart } from '../../store/actions/order';
 
 class Checkout extends Component {
     constructor(props) {
@@ -21,7 +20,7 @@ class Checkout extends Component {
     //         if(param[0] === 'price'){
     //             price = +param[1];
     //         } else {
-    //             ingredients[param[0]]= +param[1]; // param[0] lần lượt là salad, bacon, meat, cheese. param[1] là số lượng 
+    //             ingredients[param[0]]= +param[1]; // param[0] lần lượt là salad, bacon, meat, cheese. param[1] là số lượng
     //         }
     //     }
     //     this.setState({ingredients: ingredients, totalPrice: price});
